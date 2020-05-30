@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
   
+  // MARK: - Constant
+  let diceArr = ["One", "Two", "Three", "Four", "Five", "Six"]
+  
   // MARK: - Properties
   private let imageBg: UIImageView = {
     let imageView = UIImageView()
@@ -98,14 +101,16 @@ class ViewController: UIViewController {
   
   // MARK: - Action
   @objc func rollButton(_ sender: UIButton) {
-    let leftNum = Int.random(in: 0...5)
-    let rightNum = Int.random(in: 0...5)
-    let diceArr = ["One", "Two", "Three", "Four", "Five", "Six"]
+    let diceArray = [#imageLiteral(resourceName: "DiceOne"), #imageLiteral(resourceName: "DiceTwo"), #imageLiteral(resourceName: "DiceThree"), #imageLiteral(resourceName: "DiceFour"), #imageLiteral(resourceName: "DiceFive"), #imageLiteral(resourceName: "DiceSix")]
+    print(diceArray.randomElement())
+    dice1.image = diceArray.randomElement()
+    dice2.image = diceArray.randomElement()
     
-    print(leftNum, rightNum, diceArr[leftNum])
-    
-    dice1.image = UIImage(named: "Dice\(diceArr[leftNum])")
-    dice2.image = UIImage(named: "Dice\(diceArr[rightNum])")
+//    let leftNum = Int.random(in: 0...5)
+//    let rightNum = Int.random(in: 0...5)
+//
+//    dice1.image = UIImage(named: "Dice\(diceArr[leftNum])")
+//    dice2.image = UIImage(named: "Dice\(diceArr[rightNum])")
   }
 
 
