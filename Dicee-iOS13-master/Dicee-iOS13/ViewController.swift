@@ -102,7 +102,6 @@ class ViewController: UIViewController {
   // MARK: - Action
   @objc func rollButton(_ sender: UIButton) {
     let diceArray = [#imageLiteral(resourceName: "DiceOne"), #imageLiteral(resourceName: "DiceTwo"), #imageLiteral(resourceName: "DiceThree"), #imageLiteral(resourceName: "DiceFour"), #imageLiteral(resourceName: "DiceFive"), #imageLiteral(resourceName: "DiceSix")]
-    print(diceArray.randomElement())
     dice1.image = diceArray.randomElement()
     dice2.image = diceArray.randomElement()
     
