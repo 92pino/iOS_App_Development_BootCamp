@@ -21,6 +21,7 @@ class WeatherViewController: UIViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
     searchTextField.delegate = self
+    weatherManager.delegate = self
   }
   
   @IBAction func searchPressed(_ sender: UIButton) {
@@ -61,5 +62,11 @@ extension WeatherViewController: UITextFieldDelegate {
     }
     
     return true
+  }
+}
+
+extension WeatherViewController: WeatherManagerDelegate {
+  func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherData) {
+    print("DEBUG: ", weather.temperature)
   }
 }

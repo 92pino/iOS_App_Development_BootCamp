@@ -11,18 +11,15 @@ import Foundation
 struct WeatherModel: Codable {
   
   let name: String
-  let main: Temp
+  let main: Main
   let weather: [Weather]
 }
 
-struct Temp: Codable {
+struct Main: Codable {
   let temp: Double
 }
 
 struct Weather: Codable {
-    let weatherDescription: String
-
-    enum CodingKeys: String, CodingKey {
-        case weatherDescription = "description"
-    }
+  let id: Int
+  let description: String
 }
