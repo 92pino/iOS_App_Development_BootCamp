@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol WeatherManagerDelegate {
   func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherData)
+  func didFailWithError(error: Error)
 }
 
 struct WeatherManager {
@@ -20,6 +22,11 @@ struct WeatherManager {
   
   func fetchWeather(cityName: String) {
     let urlString = "\(weatherURL)&q=\(cityName)"
+    performRequest(urlString: urlString)
+  }
+  
+  func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
     performRequest(urlString: urlString)
   }
   
@@ -34,6 +41,7 @@ struct WeatherManager {
     let task = session.dataTask(with: url) { (data, response, error) in
       if let error = error {
         print(error.localizedDescription)
+        self.delegate?.didFailWithError(error: error)
       }
       
       guard let data = data else { return }
@@ -51,6 +59,7 @@ struct WeatherManager {
         print(weather.temperatureString)
       } catch let jsonError {
         print("Failed to deocde: ", jsonError.localizedDescription)
+        self.delegate?.didFailWithError(error: jsonError)
       }
     }.resume()
   }
