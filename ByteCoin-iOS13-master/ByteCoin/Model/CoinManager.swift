@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CoinManagerDelegate {
-  func didUpdatePrice(_ price: CoinModel, _ currency: CoinManager)
+  func didUpdatePrice(_ price: String, _ currency: String)
 }
 
 struct CoinManager {
@@ -24,10 +24,13 @@ struct CoinManager {
   func fetchCoin(_ currency: String) {
     let urlString = "\(baseURL)/\(currency)?apikey=\(apiKey)"
     print("DEBUG: ", urlString)
-    performRequest(urlString, currency)
+//    performRequest(urlString, currency)
+    performRequest(urlString, currency) {
+      print(1111)
+    }
   }
   
-  func performRequest(_ urlString: String, _ curreny: String) {
+  func performRequest(_ urlString: String, _ curreny: String, completion: @escaping () -> Void) {
     guard let url = URL(string: urlString) else { return }
     let session = URLSession.shared
     
